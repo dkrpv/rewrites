@@ -42,7 +42,9 @@ std::vector<std::vector<std::vector<double>>> result(std::vector<Student> vct) {
   std::vector<std::vector<double>> boo, haa;
 
   for(int i = 0; i < vct.size(); i++) {
-    std::vector<double> z, v, j { vct[i].grade1, vct[i].grade2 };
+    std::vector<double> z { vct[i].grade1, vct[i].grade2 };
+    std::vector<double> v { vct[i].grade1, vct[i].grade2 };
+    std::vector<double> j { vct[i].grade1, vct[i].grade2 };
     std::transform(z.begin(), z.end(), testP1.begin(), z.begin(), std::minus<double>());
     std::transform(v.begin(), v.end(), testP2.begin(), v.begin(), std::minus<double>());
     double l1 = std::sqrt((pow(z[0], 2) + pow(z[1], 2)));
@@ -61,12 +63,19 @@ int main() {
     using namespace matplot;
     std::vector<Student> data = fillDataSet();
     std::vector<double> x1, y1, x2, y2;
-    for(int i = 0; i < data.size(); i++) {
-      x1.push_back(result(data)[0][i][0]);
-      y1.push_back(result(data)[0][i][1]);
-      x2.push_back(result(data)[1][i][0]);
-      y2.push_back(result(data)[1][i][1]);
+    std::vector<std::vector<std::vector<double>>> thing;
+    thing = result(data);
+    for(int i = 0; i < thing[0].size(); i++) {
+      x1.push_back(thing[0][i][0]);
+      y1.push_back(thing[0][i][1]);
     }
-    plot(x1, y2, "-o");
+    for(int i = 0; i < thing[1].size(); i++) {
+      x2.push_back(thing[1][i][0]);
+      y2.push_back(thing[1][i][1]);
+    }
+    scatter(x1, y1);
+    hold(on);
+    scatter(x2, y2);
+    show();
     return 0;
 }
