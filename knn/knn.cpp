@@ -66,13 +66,13 @@ void plotMe(std::vector<Student> vct) {
 
 int main() {
     double x, y;
+    std::vector<Student> data = fillDataSet();
+    plotMe(data);
     std::vector<double> usr;
     std::cout << "Enter grades: " << std::endl;
     std::cin >> x >> y;
     usr.push_back(x);
     usr.push_back(y);
-    std::vector<Student> data = fillDataSet();
     std::cout << result(data, usr) << std::endl;
-    plotMe(data);
     return 0;
 }
